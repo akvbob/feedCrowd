@@ -24,7 +24,7 @@ export class EventService {
     return this.http.get<Event>(`${this.eventsApi}/${id}`);
   }
   update(id: string, event: Event) {
-    console.log("ATEJAU"); console.log(`${this.eventsApi}/${id}`);
+    console.log('ATEJAU'); console.log(`${this.eventsApi}/${id}`);
     return this.http.put(`${this.eventsApi}/${id}`, event);
   }
   addRecipeToEvent(recipeId: string, eventId: string) {

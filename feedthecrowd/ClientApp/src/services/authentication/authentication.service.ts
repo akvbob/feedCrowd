@@ -18,7 +18,7 @@ export class AuthenticationService {
     }
 
     public get currentUserValue(): User {
-        console.log("current user VALUEEEEEEEEEEEE");
+        console.log('current user VALUEEEEEEEEEEEE');
         console.log(this.currentUserSubject.value);
         return this.currentUserSubject.value;
     }
@@ -32,7 +32,7 @@ export class AuthenticationService {
                     localStorage.setItem('token', user.token);
                     localStorage.setItem('user', JSON.stringify(user));
                     sessionStorage.setItem('currentUser', JSON.stringify(user));
-                    console.log("PRISILOGINO + tokens:" + user.token);
+                    console.log('PRISILOGINO + tokens:' + user.token);
                     this.currentUserSubject.next(user);
                 }
 
