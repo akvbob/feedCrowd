@@ -36,12 +36,11 @@ class ProductToExport {
 })
 export class EventComponent {
 
-    dataList: Array<ProductToExport>=[];
+    dataList: Array<ProductToExport> = [];
     event: Event;
     recipes: Recipe[];
     eventForm: FormGroup;
     id: string;
-    
     submitted = false;
     localUserId: any;
     constructor(
@@ -83,10 +82,10 @@ export class EventComponent {
         });
     }
 
-    onSubmit() {        
+    onSubmit() {
         this.submitted = true;
     if (this.eventForm.invalid) {
-        return;}
+        return; }
         if (this.eventForm.value.eventEndDate < this.eventForm.value.eventStartDate) {
             Toast.fire({
                 type: 'error',
@@ -156,9 +155,8 @@ export class EventComponent {
             obj.products.forEach(o => {
                 const d = new ProductToExport(obj.title, o.name, (o.quantity / obj.servings * this.event.peopleCount).toFixed(2));
                 this.dataList.push(d);
-            });            
+            });
         });
-        
         this.excelService.exportAsExcelFile(this.dataList, this.event.title + '(' + this.event.peopleCount + ' people)' + '_');
         Toast.fire({
             type: 'success',
