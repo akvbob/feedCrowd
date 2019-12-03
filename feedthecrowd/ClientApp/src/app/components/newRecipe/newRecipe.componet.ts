@@ -79,7 +79,7 @@ export class NewRecipeComponent {
     get f() { return this.newInfo.controls; }
     onSubmit() {
 console.log(this.newInfo.controls.products.value);
-        if (this.newInfo.controls.title.value.toString() === "") {
+        if (this.newInfo.controls.title.value.toString() === '') {
             Toast.fire({
                 type: 'error',
                 title: 'Enter recipe title!',
@@ -87,7 +87,7 @@ console.log(this.newInfo.controls.products.value);
             });
             return;
         }
-        if (this.newInfo.controls.servings.value.toString() === "" || this.newInfo.controls.servings.value < 1) {
+        if (this.newInfo.controls.servings.value.toString() === '' || this.newInfo.controls.servings.value < 1) {
             Toast.fire({
                 type: 'error',
                 title: 'Enter correct number of servings!',
@@ -112,7 +112,7 @@ console.log(this.newInfo.controls.products.value);
                 });
                 return;
         }
-        if(this.newInfo.controls.description.value.toString() === ""){
+        if(this.newInfo.controls.description.value.toString() === ''){
             Toast.fire({
                 type: 'error',
                 title: 'Fill out the description!',
