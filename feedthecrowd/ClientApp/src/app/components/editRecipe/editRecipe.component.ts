@@ -212,7 +212,6 @@ export class EditRecipeComponent {
 
     }
     get formData() {
-        //return this.newInfo.get('products'); 
         return <FormArray>this.newInfo.get('products');
     }
 }
