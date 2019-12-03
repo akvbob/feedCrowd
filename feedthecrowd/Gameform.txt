@@ -1,0 +1,98 @@
+namespace GameClient
+{
+    public partial class GameForm : Form
+    {
+        int mouseCellX;
+        int mouseCellY;
+        User yourPlayer;
+        private List<Board> boards = new List<Board>();
+        private Board board;
+
+        public GameForm()
+        {
+            InitializeComponent();
+            GetBoardsList();         
+            int boardId = GetBoardIdOfThisPlayer();
+            GetBoardWithCoordinates(boardId);
+            yourPlayer = new User(1, "Jonas", "jonas@gmail.com");
+            yourPlayer.GetShipSet(board);
+
+            mouseCellX = -1;
+            mouseCellY = -1;
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void GetBoardWithCoordinates(int boardId)
+        {
+            HttpClient client = new HttpClient();
+            var responseString = await client.GetStringAsync(String.Format("https://localhost:5001/api/boards/{0}", boardId));
+            board = JsonConvert.DeserializeObject<Board>(responseString); 
+        }
+
+        private async void GetBoardsList()
+        {
+            HttpClient client = new HttpClient();
+            var responseString = await client.GetStringAsync(String.Format("https://localhost:5001/api/boards"));
+            JArray json = JArray.Parse(responseString);
+            List<string> stringList = new List<string>();
+            foreach (var obj in json)
+            {
+                int id = (int)obj.SelectToken("id");
+                string name = (string)obj.SelectToken("name");
+                int status = (int)obj.SelectToken("status");
+                int length = (int)obj.SelectToken("length");
+                int width = (int)obj.SelectToken("width");
+                int playerId = (int)obj.SelectToken("player_Id");
+                int playerTwo = (int)obj.SelectToken("player_Two");
+                Board board = new Board(id, name, status, length, width, playerId, playerTwo);
+                boards.Add(board);
+            }
+        }
+
+        private int GetBoardIdOfThisPlayer()
+        {
+            var board = boards.Find(x => x.Player_Id == yourPlayer.GetId() || x.Player_Two == yourPlayer.GetId());
+            return 1; //board.Id;
+        }
+
+        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        {
+           // yourPlayer = new User();           
+            GraphicContext.DrawShipSet(yourPlayer.ShipSet, e);  ////šita eilutė nupiešia visus "mano" laivus  //TODO ŽAIDŽIANTĮ ŽAIDĖJĄ REIK GAUT!!!!
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            // Are we on the grid of the first deck?
+            if (GraphicContext.GetCoorX(this, pictureBox1) != -1 && GraphicContext.GetCoorY(this, pictureBox1) != -1)
+            {
+                // Have the cell selected by mouse changed?
+                if (GraphicContext.GetCell(GraphicContext.GetCoorX(this, pictureBox1)) != mouseCellX || GraphicContext.GetCell(GraphicContext.GetCoorY(this, pictureBox1)) != mouseCellY)
+                {
+                    // Update the cell selected by mouse.
+                    mouseCellX = GraphicContext.GetCell(GraphicContext.GetCoorX(this, pictureBox1));
+                    mouseCellY = GraphicContext.GetCell(GraphicContext.GetCoorY(this, pictureBox1));
+
+                    // Repaint the first deck.
+                    pictureBox1.Refresh();
+
+                    // Draw the outer frame of the selected cell.
+                    GraphicContext.DrawOuterFrameCell(mouseCellX, mouseCellY, 5, this, pictureBox1);
+                }
+            }
+            else
+            {
+                // Unselect the cell in the first deck.
+                mouseCellX = -1;
+                mouseCellY = -1;
+
+                // Repaint the first deck.
+                pictureBox1.Refresh();
+            }
+        }
+    }
+}

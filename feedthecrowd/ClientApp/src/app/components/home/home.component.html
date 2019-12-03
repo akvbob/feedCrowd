@@ -1,0 +1,21 @@
+<div *ngIf="recipes?.length > 0">
+  <div>
+    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="&#8981;Start searching for a recipe by title">
+  </div>
+  <br />
+  <mat-grid-list cols="4" rowHeight="1:1">
+    <mat-grid-tile *ngFor="let recipe of recipes | filter:searchText | paginate: config" (click)="onRecipeRowClick(recipe)" style="cursor: pointer; border-radius: 10px; filter: grayscale(50%);" onmouseout="this.style.filter='grayscale(50%)';" onmouseover="this.style.filter='grayscale(0%)';">
+      <div *ngIf="recipe.image === ''; else Show">
+        <img src="../../../assets/no_img.png" class="resize">
+      </div>
+      <ng-template #Show>
+        <img src="{{recipe.image}}" class="resize">
+      </ng-template>
+      <mat-grid-tile-header>{{recipe.title}}</mat-grid-tile-header>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <br/>
+  <div class="pagination center">
+    <pagination-controls (pageChange)="pageChange($event)" class="pagination"></pagination-controls>
+  </div>
+</div>

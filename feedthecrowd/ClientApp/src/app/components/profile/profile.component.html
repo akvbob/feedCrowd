@@ -1,0 +1,101 @@
+
+    <h2>My profile</h2>
+    <form [formGroup]="newInfo" (ngSubmit)="save()">
+        <div class="row center">
+            <div class="col-sm-4">
+                <div *ngIf="user?.photo === null && selectedPho === null" class="row center">
+                    <img src="../../../assets/profile-icon.png" class="img" style="border-radius: 10px; height: 100%; width: 100%; object-fit: contain">
+                </div>
+                <div *ngIf="selectedPho != null">
+                    <img src="{{selectedPho}}" class="img" style="border-radius: 10px; height: 100%; width: 100%; object-fit: contain">
+                </div>
+                <div *ngIf="user?.photo != null && selectedPho === null">
+                    <img src="{{user?.photo}}" class="img" style="border-radius: 10px; height: 100%; width: 100%; object-fit: contain">
+                </div>
+                <br />
+                <div class="box">
+                    <input class="form-control-file" type="file" formControlName="pic" (change)="encodeImageFileAsURL($event)" />
+                </div>
+            </div>
+            <div class="col-sm-8">
+                    <div class="row">
+                        <div class="col-sm-4 right bold">
+                            <h3 class="navbar-brand">Username:</h3>
+                        </div>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text" value="{{user?.userName}}" formControlName="name" disabled>
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="col-sm-4 right bold">
+                        <h3 class="navbar-brand">Name:</h3>
+                    </div>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" value="{{user?.name}}" formControlName="name" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 right bold">
+                        <h3 class="navbar-brand">SurName:</h3>
+                    </div>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" value="{{user?.surname}}" formControlName="surname" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 right bold">
+                        <h3 class="navbar-brand">E-mail:</h3>
+                    </div>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="email" formControlName="email" value="{{user?.email}}" required>
+                    </div>
+                </div>
+                <div class="row right save-button">
+                    <button class="btn btn-success" type="submit">Update my info</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <br/>
+    <div class="row">
+        <div class="col-sm-9">
+            <h2 class="navbar-brand">My Events</h2>
+        </div>
+        <div class="col-sm-3 right">
+            <button class="btn btn-success" [routerLink]='["/createEvent"]'>Create new</button>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">People Count</th>
+                    <th scope="col">Event Start Date</th>
+                    <th scope="col">Event End Date</th>
+                    <th scope="col">Date Created</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ev of events; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>
+                        <a style="cursor: pointer;" (click)="onEventRowClick(ev)">{{ev.title}}
+                            <i class="fas fa-angle-double-right"></i>
+                        </a>
+                    </td>
+                    <td>{{ev.peopleCount}}</td>
+                    <td>{{ev.eventStartDate | date : "yyyy-MM-dd"}}</td>
+                    <td>{{ev.eventEndDate | date : "yyyy-MM-dd"}}</td>
+                    <td>{{ev.dateCreated | date : "yyyy-MM-dd"}}</td>
+                    <td>
+                        <i style="cursor: pointer;" class="fas fa-edit" (click)="onEditRowClick(ev)"></i>
+                    </td>
+                    <td>
+                        <i style="cursor: pointer;" class="fas fa-trash" (click)="removeEvent(ev)"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>

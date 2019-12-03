@@ -1,0 +1,97 @@
+<form [formGroup]="newInfo" (ngSubmit)="save()">
+    <h3>Edit mode</h3>
+    <div class="row center">
+        <div class="col-sm-6">
+            <div *ngIf="recipe?.image === null && selectedPho === null" class="row center">
+                <img src="../../../assets/no_img.png" class="img"
+                    style="border-radius: 10px; height: 100%; width: 50%; object-fit: contain">
+            </div>
+            <div *ngIf="selectedPho != null">
+                <img src="{{selectedPho}}" class="img"
+                    style="border-radius: 10px; height: 100%; width: 100%; object-fit: contain">
+            </div>
+            <div *ngIf="recipe?.image != null && selectedPho === null">
+                <img src="{{recipe?.image}}" class="img"
+                    style="border-radius: 10px; height: 100%; width: 100%; object-fit: contain">
+            </div>
+            <br />
+            <div class="center">
+                <input class="form-control-file" type="file" formControlName="image"
+                    (change)="encodeImageFileAsURL($event)" />
+            </div>
+        </div>
+        <div class="col-sm-6 right">
+            <div class="row">
+                <div class="col-sm-4 right bold">
+                    <h3 class="navbar-brand">Recipe title:</h3>
+                </div>
+                <div class="col-sm-8 right">
+                    <input type="text" class="form-control" placeholder="Enter recipes title" value="{{recipe?.title}}"
+                        formControlName="title" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 right bold">
+                    <a class="navbar-brand">Preparation time:</a>
+                </div>
+                <div class="col-sm-8 right">
+                    <input type="text" class="form-control" placeholder="Enter recipes time" value="{{recipe?.time}}"
+                        formControlName="time" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 right bold">
+                    <a class="navbar-brand">Servings:</a>
+                </div>
+                <div class="col-sm-8 right">
+                    <input type="number" min="1" class="form-control" placeholder="Enter recipes servings"
+                        value="{{recipe?.servings}}" formControlName="servings" required>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="row center">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Qty.</th>
+                    <th scope="col">Product Name</th>
+                    <th><i class="fas fa-plus-circle" (click)="addProductButtonClick()"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of products; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{product?.quantity}}</td>
+                    <td>{{product?.name}}</td>
+                    <td><i class="fas fa-trash" (click)="deletecurrentProduct(product)"></i></td>
+                </tr>
+                <tr formArrayName="products"
+                    *ngFor="let product of formData.controls; let i = index">
+                    <td [formGroupName]="[i]">{{this.products.length + i + 1}}</td>
+                    <td [formGroupName]="[i]">
+                        <input class="form-control" type="number" name="type" formControlName="quantity"
+                            id="{{'quantity'+i}}" placeholder="Enter quantity">
+                    </td>
+                    <td [formGroupName]="[i]">
+                        <input class="form-control" type="text" id="{{'name'+i}}" formControlName="name"
+                            placeholder="Enter product name">
+                    </td>
+                    <td [formGroupName]="[i]"><i style="cursor: pointer;" class="fas fa-trash"
+                            (click)="deleteProduct(i)"></i></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+    <h3>Description:</h3>
+    <div>
+        <textarea type="textarea" class="form-control" placeholder="Enter recipes description" value="{{recipe?.description}}"
+            formControlName="description" required></textarea>
+    </div>
+    <div class="save-button">
+        <button class="btn btn-success" type="submit">Save</button>
+    </div>
+</form>

@@ -1,0 +1,107 @@
+<div *ngIf="recipes?.length > 0; else Show">
+    <div *ngFor="let recipe of recipes">
+        <div class="card bg-light mb-3" style="display: inline;max-width: 45%; margin-right: 5%; float: left;">
+            <div class="card-header">{{recipe.title}}
+                <i class="fas fa-trash" (click)="deleteRecipe(recipe)" style="float: right; cursor: pointer;"></i>
+                <i class="fas fa-edit" (click)="editRecipe(recipe)" style="float: right; margin-right: 5px; cursor: pointer;"></i>
+            </div>
+            <div class="card-body row">
+                <div class="card-title col-sm-6">
+                    <div *ngIf="recipe.image === null">
+                        <img src="../../../assets/no_img.png" class="img"
+                            style="border-radius: 10px; max-height: 230px; width: 50%; object-fit: contain">
+                    </div>
+                    <div *ngIf="recipe.image != null">
+                        <img src="{{recipe.image}}" class="img"
+                            style="border-radius: 10px; max-height: 230px; width: 50%; object-fit: contain">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-6 right">
+                            <h6>Servings:</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            {{recipe.servings}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h6>Preparation time:</h6>
+                        </div>
+                        <div class="col-sm-6">
+                            {{recipe.time}}
+                        </div>
+                    </div>
+                </div>
+                <p class="card-text">
+                    
+
+                </p>
+                <!--<div (click)="onRecipeRowClick(recipe)">
+                            <div *ngIf="recipe.image === null || recipe.image === ''; else Show">
+                                <figure>
+                                    <img src="../../../assets/placeholder.png" class="resize">
+                                </figure>
+                            </div>
+                            <ng-template #Show>
+                                <figure>
+                                    <img src="{{recipe.image}}" class="resize">
+                                </figure>
+                            </ng-template>
+        
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <h6>Recipe title</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <h6>Servings</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <h6>Preparation time</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    {{recipe.title}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    {{recipe.servings}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    {{recipe.time}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <i class="fas fa-trash" (click)="deleteRecipe(recipe)"></i>
+                                </div>
+                                <div class="col-sm-4">
+                                    <i class="fas fa-edit" (click)="editRecipe(recipe)"></i>
+                                </div>
+                            </div>
+        
+                        </div>-->
+            </div>
+        </div>
+
+    </div>
+</div>
+<ng-template #Show>
+    <h1>Your own recipes don't exist</h1>
+    <button class="btn btn-success" (click)="redirectToCreateRecipe()">Create your own recipe</button>
+</ng-template>

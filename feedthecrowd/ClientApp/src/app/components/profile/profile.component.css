@@ -1,0 +1,40 @@
+.img {
+    height: 10em;
+    width: 10em;
+}
+.right {
+    text-align: right;
+   float: right
+}
+.bold {
+    font-weight: bold;
+}
+.center {
+    text-align: center;
+    align-content: center;
+    display:flex;
+    align-items: center; /*vertical alignement*/
+    justify-content: center; /* horizontal alignement*/
+}
+.align{
+    /* margin: auto; */
+    width: 90%;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+/*a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    margin-bottom: 10px;
+  }
+.save-button{
+    float: right;
+    padding: 25px;
+}
+.button-img {
+    height: 25px;
+    width: 25px;  
+}*/

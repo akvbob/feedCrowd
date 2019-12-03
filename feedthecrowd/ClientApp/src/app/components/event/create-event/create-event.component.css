@@ -1,0 +1,20 @@
+.align{
+    margin: auto;
+    width: 90%;
+    border: 3px solid rgba(0, 0, 0, 0.109);
+    padding:10px;
+  }
+.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    margin-bottom: 10px;
+  }
+.save-button{
+    float: right;
+    padding: 25px;
+  }
+.button-img {
+    height: 25px;
+    width: 25px;  
+  }

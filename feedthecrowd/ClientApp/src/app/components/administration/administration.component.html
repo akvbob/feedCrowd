@@ -1,0 +1,46 @@
+<h2>Administration</h2>
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+          aria-controls="collapseOne">
+          <b>Users</b>
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Full name</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Is administrator</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users; let i = index;">
+              <td>{{i+1}}</td>
+              <td>{{user.name + " " + user.surname}}</td>
+              <td>{{user.userName}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.isAdmin == true ? 'Yes' : 'No'}}</td>
+              <td>
+                <button class="btn btn-link" (click)="changeRights(user)">
+                  {{user.isAdmin ? 'Disable admin rights' : 'Enable admin rights'}}
+                </button>
+              </td>
+              <td>
+                <i style="cursor: pointer;" class="fas fa-trash" (click)="removeUser(user.id)"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

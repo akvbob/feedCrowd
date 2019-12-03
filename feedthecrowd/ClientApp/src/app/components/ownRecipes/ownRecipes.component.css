@@ -1,0 +1,17 @@
+img.resize {
+    width:10em;
+    height:10em;
+  }
+.center {
+    text-align: center;
+    align-content: center;
+    display:flex;
+    align-items: center; /*vertical alignement*/
+    justify-content: center; /* horizontal alignement*/
+}
+.align{
+    margin: auto;
+    width: 80%;
+    border: 3px solid rgba(0, 0, 0, 0.109);
+    padding: 10px;
+  }
