@@ -95,8 +95,8 @@ console.log(this.newInfo.controls.products.value);
             });
             return;
         }
-        if(this.newInfo.controls.products.value.length == 0 || 
-            this.newInfo.controls.products.value.length == 1 && this.newInfo.controls.products.value[0].name.toString() === ''){
+        if(this.newInfo.controls.products.value.length === 0 ||
+            this.newInfo.controls.products.value.length === 1 && this.newInfo.controls.products.value[0].name.toString() === ''){
                 Toast.fire({
                     type: 'error',
                     title: 'Choose at least 1 product!',
@@ -165,8 +165,7 @@ console.log(this.newInfo.controls.products.value);
         })
         return Iftrue;
     }
-    get formData(){ 
-        // return this.newInfo.get('products'); 
+    get formData(){
         return <FormArray>this.newInfo.get('products');
     }
 }
