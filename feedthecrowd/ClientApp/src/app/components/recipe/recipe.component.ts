@@ -169,12 +169,12 @@ export class RecipeComponent {
       }
     });
   }
-  isAdmin(){
+  isAdmin() {
     let u = null;
-    if(sessionStorage.getItem('currentUser')){
+    if (sessionStorage.getItem('currentUser')) {
       u = JSON.parse(sessionStorage.getItem('currentUser'));
       return u.isAdmin;
-    }     
+    }
     return false;
   }
 }
