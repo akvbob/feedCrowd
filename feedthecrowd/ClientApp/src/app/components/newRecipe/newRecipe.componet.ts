@@ -78,7 +78,7 @@ export class NewRecipeComponent {
 
     get f() { return this.newInfo.controls; }
     onSubmit() {
-console.log(this.newInfo.controls.products.value);
+        console.log(this.newInfo.controls.products.value);
         if (this.newInfo.controls.title.value.toString() === '') {
             Toast.fire({
                 type: 'error',
