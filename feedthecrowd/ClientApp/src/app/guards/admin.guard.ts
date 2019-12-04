@@ -12,7 +12,7 @@ export class AdminGuard implements CanActivate {
   ) { }
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
-    var isAdmin = false;
+    let isAdmin = false;
     this.auth.currentUser.subscribe(d => isAdmin = d.isAdmin);
     if (isAdmin) {
       return true;

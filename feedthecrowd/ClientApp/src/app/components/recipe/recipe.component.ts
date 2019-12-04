@@ -170,7 +170,7 @@ export class RecipeComponent {
     });
   }
   isAdmin(){
-    var u = null;
+    let u = null;
     if(sessionStorage.getItem('currentUser')){
       u = JSON.parse(sessionStorage.getItem('currentUser'));
       return u.isAdmin;
