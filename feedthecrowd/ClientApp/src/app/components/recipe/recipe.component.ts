@@ -174,7 +174,7 @@ export class RecipeComponent {
     if(sessionStorage.getItem('currentUser')){
       u = JSON.parse(sessionStorage.getItem('currentUser'));
       return u.isAdmin;
-    }      
+    }     
     return false;
   }
 }
