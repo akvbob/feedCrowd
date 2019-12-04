@@ -95,8 +95,8 @@ export class NewRecipeComponent {
             });
             return;
         }
-        if(this.newInfo.controls.products.value.length === 0 ||
-            this.newInfo.controls.products.value.length === 1 && this.newInfo.controls.products.value[0].name.toString() === ''){
+        if (this.newInfo.controls.products.value.length === 0 ||
+            this.newInfo.controls.products.value.length === 1 && this.newInfo.controls.products.value[0].name.toString() === '') {
                 Toast.fire({
                     type: 'error',
                     title: 'Choose at least 1 product!',
@@ -104,7 +104,7 @@ export class NewRecipeComponent {
                 });
                 return;
         }
-        if(!this.checkQuantityLegal(this.newInfo.controls.products.value)){
+        if (!this.checkQuantityLegal(this.newInfo.controls.products.value)) {
                 Toast.fire({
                     type: 'error',
                     title: 'Illegal Product quantity!',
@@ -112,7 +112,7 @@ export class NewRecipeComponent {
                 });
                 return;
         }
-        if(this.newInfo.controls.description.value.toString() === ''){
+        if (this.newInfo.controls.description.value.toString() === '') {
             Toast.fire({
                 type: 'error',
                 title: 'Fill out the description!',
@@ -156,16 +156,16 @@ export class NewRecipeComponent {
             this.selectedPho = reader.result;
         };
     }
-    checkQuantityLegal(products: Product[]){
-        let Iftrue= true;
-        products.forEach(o =>{
-            if(o.quantity < 0){
+    checkQuantityLegal(products: Product[]) {
+        let Iftrue = true;
+        products.forEach(o => {
+            if (o.quantity < 0) {
                 Iftrue = false;
             }
-        })
+        });
         return Iftrue;
     }
-    get formData(){
+    get formData() {
         return <FormArray>this.newInfo.get('products');
     }
 }

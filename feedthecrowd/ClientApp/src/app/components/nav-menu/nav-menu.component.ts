@@ -19,7 +19,7 @@ export class NavMenuComponent {
   user: User;
   localUser: any;
   id: any;
-  
+
   navbarOpen = false;
 
   constructor(
@@ -44,8 +44,8 @@ export class NavMenuComponent {
     }
     return false;
   }
-  isAdmin(){
-    if(sessionStorage.getItem('currentUser')){
+  isAdmin() {
+    if (sessionStorage.getItem('currentUser')) {
       return JSON.parse(sessionStorage.getItem('currentUser')).isAdmin;
     }
     return false;

@@ -4,7 +4,7 @@ export class Event {
     id: number;
     userId: number;
     title: string;
-    peopleCount:number;
+    peopleCount: number;
     eventStartDate: Date;
     eventEndDate: Date;
     dateCreated: Date;

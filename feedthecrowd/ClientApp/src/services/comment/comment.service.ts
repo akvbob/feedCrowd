@@ -10,15 +10,15 @@ import { NewComment } from 'src/app/models/newComment';
 export class CommentService {
   private readonly commentsApi = `${environment.webApiUrl}/comments`;
   constructor(private http: HttpClient) { }
-  
+
   getCommentsOfRecipe(recipeId: string): Observable<Comment[]> {
     return this.http.get<Comment[]>(`${this.commentsApi}/${recipeId}/recipe`);
   }
-  createComment(comment: NewComment){
+  createComment(comment: NewComment) {
       return this.http.post<NewComment>(`${this.commentsApi}`, comment);
   }
   delete(id: number) {
-    return this.http.delete(this.commentsApi+ '/' + id);
+    return this.http.delete(this.commentsApi + '/' + id);
   }
   /*getProducts(): Observable<Comment[]> {
     return this.http.get<Product[]>(this.productsApi);
